@@ -9,18 +9,18 @@ using Serilog;
 
 namespace DataMiner
 {
-    public class DataRetriever
+    public class ExchangeMarketDataRetriever
     {
         private CoinigyApi Api { get; }
-        private string ExchangeListFileName { get; }
+        private StorageAppender Appender { get; }
 
         private FileStore<IList<ExchangeMarkets>> Markets { get; set; }
 
-        private void ListMarkets(string filename)
+        private void ListMarkets()
         {
-            if (Markets == null && File.Exists(filename))
+            if (Markets == null && Appender.HasData)
             {
-                Markets = JsonConvert.DeserializeObject<FileStore<IList<ExchangeMarkets>>>(File.ReadAllText(filename));
+                Markets = JsonConvert.DeserializeObject<FileStore<IList<ExchangeMarkets>>>(Appender.ReadAllText());
             }
             else if (Markets != null && Markets.LastSaved.Add(Markets.Expires) > DateTime.Now)
             {
@@ -36,28 +36,34 @@ namespace DataMiner
 
             foreach (var exchange in Markets.Data)
             {
-                exchange.Markets = Api.Markets(exchange.exch_code).data;
+                exchange.Markets = Mapper.Map<IList<MarketValue>>(Api.Markets(exchange.exch_code).data);
             }
-            var output = JsonConvert.SerializeObject(Markets);
-            File.WriteAllText(filename, output);
+            var output = JsonConvert.SerializeObject(Markets, Formatting.Indented);
+            Appender.Save(output);
         }
 
-        public DataRetriever(string apikey, string apisecret, string exchangeFile)
+        public ExchangeMarketDataRetriever(string apikey, string apisecret, StorageAppender appender)
         {
-            ExchangeListFileName = exchangeFile;
-            Api = new CoinigyApi(apikey, apisecret);
+            Appender = appender;
+            Api = new CoinigyApi(apikey, apisecret, "https://api.coinigy.com/api/v1");
         }
 
         public ticker_response GetTick(string exchange, string code)
         {
             //var data = Api.Data("PLNX", "BTC/USDT", MarketDataType.history);
-            ListMarkets(ExchangeListFileName);
+            ListMarkets();
             return Api.Ticker(exchange, code);
         }
 
         public class ExchangeMarkets : Exchange
         {
-            public List<Market> Markets { get; set; }
+            public IList<MarketValue> Markets { get; set; }
+        }
+
+        public class MarketValue : Market
+        {
+            public decimal Volume { get; set; }
+
         }
     }
 }
