@@ -64,17 +64,17 @@
     <Compile Include="Configuration\MarketConfiguration.cs" />
     <Compile Include="Configuration\TradeConfiguration.cs" />
     <Compile Include="Configuration\TradeRangeInfoConfiguration.cs" />
+    <Compile Include="Entities\ApiAsset.cs" />
+    <Compile Include="Entities\ApiExchange.cs" />
+    <Compile Include="Entities\ApiMarket.cs" />
+    <Compile Include="Entities\Market.cs" />
+    <Compile Include="Entities\Trade.cs" />
+    <Compile Include="Entities\TradeRangeInfo.cs" />
     <Compile Include="Entities\TradeType.cs" />
     <Compile Include="DataMinerContext.cs" />
     <Compile Include="Entities\Api.cs" />
-    <Compile Include="Entities\ApiAsset.cs" />
-    <Compile Include="Entities\ApiExchange.cs" />
     <Compile Include="Entities\Exchange.cs" />
-    <Compile Include="Entities\ApiMarket.cs" />
-    <Compile Include="Entities\Market.cs" />
     <Compile Include="Entities\Asset.cs" />
-    <Compile Include="Entities\Trade.cs" />
-    <Compile Include="Entities\TradeRangeInfo.cs" />
     <Compile Include="Entities\TradeRangeInfoPeriod.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

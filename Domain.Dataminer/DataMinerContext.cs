@@ -1,46 +1,18 @@
+using System;
+using System.Data.Common;
+using System.Data.Entity;
+using System.Data.Entity.Infrastructure;
+using Domain.Base;
 using Domain.Dataminer.Configuration;
 using Domain.Dataminer.Entities;
 
 namespace Domain.Dataminer
 {
-    using System;
-    using System.Data.Entity;
-    using Domain.Base;
-
     public class DataMinerContext : DataContextBase, IDataMinerContext
     {
-
         static DataMinerContext()
         {
             Database.SetInitializer<DataMinerContext>(null);
-        }
-
-        public static IDataMinerContext Create()
-        {
-            return new DataMinerContext();
-        }
-
-        public static IDataMinerContext Create(string connectionString)
-        {
-            return new DataMinerContext(connectionString);
-        }
-
-        public static IDataMinerContext Create(string connectionString,
-            System.Data.Entity.Infrastructure.DbCompiledModel model)
-        {
-            return new DataMinerContext(connectionString, model);
-        }
-
-        public static IDataMinerContext Create(System.Data.Common.DbConnection existingConnection,
-            bool contextOwnsConnection)
-        {
-            return new DataMinerContext(existingConnection, contextOwnsConnection);
-        }
-
-        public static IDataMinerContext Create(System.Data.Common.DbConnection existingConnection,
-            System.Data.Entity.Infrastructure.DbCompiledModel model, bool contextOwnsConnection)
-        {
-            return new DataMinerContext(existingConnection, model, contextOwnsConnection);
         }
 
         internal DataMinerContext()
@@ -53,20 +25,58 @@ namespace Domain.Dataminer
         {
         }
 
-        internal DataMinerContext(string connectionString, System.Data.Entity.Infrastructure.DbCompiledModel model)
+        internal DataMinerContext(string connectionString, DbCompiledModel model)
             : base(connectionString, model)
         {
         }
 
-        internal DataMinerContext(System.Data.Common.DbConnection existingConnection, bool contextOwnsConnection)
+        internal DataMinerContext(DbConnection existingConnection, bool contextOwnsConnection)
             : base(existingConnection, contextOwnsConnection)
         {
         }
 
-        internal DataMinerContext(System.Data.Common.DbConnection existingConnection,
-            System.Data.Entity.Infrastructure.DbCompiledModel model, bool contextOwnsConnection)
+        internal DataMinerContext(DbConnection existingConnection,
+            DbCompiledModel model, bool contextOwnsConnection)
             : base(existingConnection, model, contextOwnsConnection)
         {
+        }
+
+        public DbSet<ApiAsset> ApiAssets { get; set; }
+        public DbSet<ApiExchange> ApiExchange { get; set; }
+        public DbSet<Api> Api { get; set; }
+        public DbSet<ApiMarket> ApiMarkets { get; set; }
+        public DbSet<Exchange> Exchanges { get; set; }
+        public DbSet<Market> Markets { get; set; }
+        public DbSet<Asset> Assets { get; set; }
+        public DbSet<Trade> Trades { get; set; }
+        public DbSet<TradeRangeInfo> TradeRangeInfos { get; set; }
+
+        public static IDataMinerContext Create()
+        {
+            return new DataMinerContext();
+        }
+
+        public static IDataMinerContext Create(string connectionString)
+        {
+            return new DataMinerContext(connectionString);
+        }
+
+        public static IDataMinerContext Create(string connectionString,
+            DbCompiledModel model)
+        {
+            return new DataMinerContext(connectionString, model);
+        }
+
+        public static IDataMinerContext Create(DbConnection existingConnection,
+            bool contextOwnsConnection)
+        {
+            return new DataMinerContext(existingConnection, contextOwnsConnection);
+        }
+
+        public static IDataMinerContext Create(DbConnection existingConnection,
+            DbCompiledModel model, bool contextOwnsConnection)
+        {
+            return new DataMinerContext(existingConnection, model, contextOwnsConnection);
         }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
@@ -81,18 +91,7 @@ namespace Domain.Dataminer
             modelBuilder.Configurations.Add(new AssetConfiguration());
             modelBuilder.Configurations.Add(new TradeConfiguration());
             modelBuilder.Configurations.Add(new TradeRangeInfoConfiguration());
-
         }
-
-        public DbSet<ApiAsset> ApiAssets { get; set; }
-        public DbSet<Api> Api { get; set; }
-        public DbSet<ApiExchange> ApiExchange { get; set; }
-        public DbSet<ApiMarket> ApiMarkets { get; set; }
-        public DbSet<Exchange> Exchanges { get; set; }
-        public DbSet<Market> Markets { get; set; }
-        public DbSet<Asset> Assets { get; set; }
-        public DbSet<Trade> Trades { get; set; }
-        public DbSet<TradeRangeInfo> TradeRangeInfos { get; set; }
 
         public static DbModelBuilder CreateModel(DbModelBuilder modelBuilder,
             string schema)
@@ -110,7 +109,7 @@ namespace Domain.Dataminer
         }
     }
 
-    public interface IDataMinerContext : System.IDisposable, IRepositoryCreator
+    public interface IDataMinerContext : IDisposable, IRepositoryCreator
     {
         DbSet<ApiAsset> ApiAssets { get; set; }
         DbSet<Api> Api { get; set; }

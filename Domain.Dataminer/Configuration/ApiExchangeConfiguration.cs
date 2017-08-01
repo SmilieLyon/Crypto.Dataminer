@@ -27,16 +27,18 @@ namespace Domain.Dataminer.Configuration
 
             Property(x => x.Code)
                 .HasColumnName(@"Code")
-                .IsRequired()
-                .HasColumnType("varchar");
+                .HasColumnType("varchar")
+                .HasMaxLength(50);
 
             Property(x => x.ExternalId)
                 .HasColumnName(@"ExternalId")
-                .HasColumnType("varchar");
+                .HasColumnType("varchar")
+                .HasMaxLength(50);
 
             Property(x => x.Fee)
                 .HasColumnName(@"Fee")
-                .HasColumnType("money");
+                .HasColumnType("decimal")
+                .HasPrecision(10, 9);
 
             Property(x => x.BalanceEnabled)
                 .HasColumnName(@"BalanceEnabled")

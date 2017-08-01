@@ -4,6 +4,13 @@ namespace Domain.Dataminer.Entities
 {
     public class Market
     {
+        public Market()
+        {
+            ApiMarkets = new HashSet<ApiMarket>();
+            Trades = new HashSet<Trade>();
+            TradeRangeInfos = new HashSet<TradeRangeInfo>();
+        }
+
         public int MarketId { get; set; }
         public int ExchangeId { get; set; }
         public int PrimaryAssetId { get; set; }

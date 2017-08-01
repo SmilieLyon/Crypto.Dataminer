@@ -1,10 +1,18 @@
-using System.Collections;
 using System.Collections.Generic;
 
 namespace Domain.Dataminer.Entities
 {
     public class Api
     {
+        public Api()
+        {
+            ApiAssets = new HashSet<ApiAsset>();
+            ApiExchanges = new HashSet<ApiExchange>();
+            ApiMarkets = new HashSet<ApiMarket>();
+            Trades = new HashSet<Trade>();
+            TradeRangeInfos = new HashSet<TradeRangeInfo>();
+        }
+
         public int ApiId { get; set; }
         public string Name { get; set; }
 

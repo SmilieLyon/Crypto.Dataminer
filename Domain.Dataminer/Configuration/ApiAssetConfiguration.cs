@@ -13,7 +13,7 @@ namespace Domain.Dataminer.Configuration
         public ApiAssetConfiguration(string schema)
         {
             ToTable("ApiAsset", schema);
-            HasKey(x => new { x.ApiId, x.AssetId });
+            HasKey(x => new {x.ApiId, x.AssetId});
 
             Property(x => x.ApiId)
                 .HasColumnName(@"ApiId")
@@ -27,8 +27,8 @@ namespace Domain.Dataminer.Configuration
 
             Property(x => x.Code)
                 .HasColumnName(@"Code")
-                .IsRequired()
-                .HasColumnType("varchar");
+                .HasColumnType("varchar")
+                .HasMaxLength(50);
 
             HasRequired(asset => asset.Api)
                 .WithMany(i => i.ApiAssets)

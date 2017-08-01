@@ -1,16 +1,20 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.IO;
 using AutoMapper;
 using Coinigy.API;
 using Coinigy.API.Responses;
 using Newtonsoft.Json;
-using Serilog;
 
 namespace DataMiner
 {
     public class ExchangeMarketDataRetriever
     {
+        public ExchangeMarketDataRetriever(string apikey, string apisecret, StorageAppender appender)
+        {
+            Appender = appender;
+            Api = new CoinigyApi(apikey, apisecret, "https://api.coinigy.com/api/v1");
+        }
+
         private CoinigyApi Api { get; }
         private StorageAppender Appender { get; }
 
@@ -42,12 +46,6 @@ namespace DataMiner
             Appender.Save(output);
         }
 
-        public ExchangeMarketDataRetriever(string apikey, string apisecret, StorageAppender appender)
-        {
-            Appender = appender;
-            Api = new CoinigyApi(apikey, apisecret, "https://api.coinigy.com/api/v1");
-        }
-
         public ticker_response GetTick(string exchange, string code)
         {
             //var data = Api.Data("PLNX", "BTC/USDT", MarketDataType.history);
@@ -63,7 +61,6 @@ namespace DataMiner
         public class MarketValue : Market
         {
             public decimal Volume { get; set; }
-
         }
     }
 }

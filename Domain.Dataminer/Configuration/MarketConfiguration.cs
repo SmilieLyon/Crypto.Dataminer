@@ -1,4 +1,5 @@
-﻿using System.Data.Entity.ModelConfiguration;
+﻿using System.ComponentModel.DataAnnotations.Schema;
+using System.Data.Entity.ModelConfiguration;
 using Domain.Dataminer.Entities;
 
 namespace Domain.Dataminer.Configuration
@@ -19,7 +20,7 @@ namespace Domain.Dataminer.Configuration
                 .HasColumnName(@"MarketId")
                 .IsRequired()
                 .HasColumnType("int")
-                .HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.Identity);
+                .HasDatabaseGeneratedOption(DatabaseGeneratedOption.Identity);
 
             Property(x => x.ExchangeId)
                 .HasColumnName(@"ExchangeId")
@@ -39,7 +40,8 @@ namespace Domain.Dataminer.Configuration
             Property(x => x.Name)
                 .HasColumnName(@"Name")
                 .IsRequired()
-                .HasColumnType("varchar");
+                .HasColumnType("varchar")
+                .HasMaxLength(50);
 
             HasRequired(asset => asset.Exchange)
                 .WithMany(i => i.Markets)

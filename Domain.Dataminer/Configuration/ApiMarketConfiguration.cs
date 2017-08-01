@@ -13,7 +13,7 @@ namespace Domain.Dataminer.Configuration
         public ApiMarketConfiguration(string schema)
         {
             ToTable("ApiMarket", schema);
-            HasKey(x => new { x.ApiId, x.MarketId });
+            HasKey(x => new {x.ApiId, x.MarketId});
 
             Property(x => x.MarketId)
                 .HasColumnName(@"MarketId")
@@ -27,13 +27,13 @@ namespace Domain.Dataminer.Configuration
 
             Property(x => x.ExternalName)
                 .HasColumnName(@"ExternalName")
-                .IsRequired()
-                .HasColumnType("varchar");
+                .HasColumnType("varchar")
+                .HasMaxLength(50);
 
             Property(x => x.Code)
                 .HasColumnName(@"Code")
-                .IsRequired()
-                .HasColumnType("varchar");
+                .HasColumnType("varchar")
+                .HasMaxLength(50);
 
             HasRequired(asset => asset.Api)
                 .WithMany(i => i.ApiMarkets)

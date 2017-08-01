@@ -1,3 +1,4 @@
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Data.Entity.ModelConfiguration;
 using Domain.Dataminer.Entities;
 
@@ -19,12 +20,13 @@ namespace Domain.Dataminer.Configuration
                 .HasColumnName(@"ApiId")
                 .IsRequired()
                 .HasColumnType("int")
-                .HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.Identity);
+                .HasDatabaseGeneratedOption(DatabaseGeneratedOption.Identity);
 
             Property(x => x.Name)
                 .HasColumnName(@"Name")
                 .IsRequired()
-                .HasColumnType("varchar");
+                .HasColumnType("varchar")
+                .HasMaxLength(50);
         }
     }
 }

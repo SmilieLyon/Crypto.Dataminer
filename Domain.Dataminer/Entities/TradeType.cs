@@ -1,4 +1,4 @@
-namespace Domain.Dataminer.Configuration
+namespace Domain.Dataminer.Entities
 {
     public enum TradeType
     {
