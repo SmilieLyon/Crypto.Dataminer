@@ -1,8 +1,8 @@
-﻿using System;
+﻿using System.Collections.Generic;
 
 namespace Domain.Dataminer.Entities
 {
-    public abstract class Market
+    public class Market
     {
         public int MarketId { get; set; }
         public int ExchangeId { get; set; }
@@ -12,5 +12,8 @@ namespace Domain.Dataminer.Entities
         public Asset PrimaryAsset { get; set; }
         public Asset SecondaryAsset { get; set; }
         public Exchange Exchange { get; set; }
+        public ICollection<ApiMarket> ApiMarkets { get; set; }
+        public ICollection<Trade> Trades { get; set; }
+        public ICollection<TradeRangeInfo> TradeRangeInfos { get; set; }
     }
 }

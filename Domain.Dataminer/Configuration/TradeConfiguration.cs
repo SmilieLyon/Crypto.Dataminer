@@ -18,7 +18,13 @@ namespace Domain.Dataminer.Configuration
         public TradeConfiguration(string schema)
         {
             ToTable("Trade", schema);
-            HasKey(x => new { x.ApiId, x.MarketId });
+            HasKey(x => new { x.TradeId });
+
+            Property(x => x.TradeId)
+                .HasColumnName(@"TradeId")
+                .IsRequired()
+                .HasColumnType("int")
+                .HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.Identity);
 
             Property(x => x.ApiId)
                 .HasColumnName(@"ApiId")
@@ -44,13 +50,18 @@ namespace Domain.Dataminer.Configuration
                 .HasColumnName(@"Cost")
                 .IsRequired()
                 .HasColumnType("decimal(10,9)");
-        }
-    }
+            
+            HasRequired(asset => asset.Market)
+                .WithMany(i => i.Trades)
+                .HasForeignKey(asset => asset.MarketId);
 
-    public enum TradeType
-    {
-        Buy = 1,
-        Sell = 2,
-        Completed = 3
+            HasRequired(asset => asset.Api)
+                .WithMany(i => i.Trades)
+                .HasForeignKey(asset => asset.ApiId);
+
+            Map<Bid>(m => m.Requires("Type").HasValue(TradeType.Bid))
+                .Map<Ask>(m => m.Requires("Type").HasValue(TradeType.Ask))
+                .Map<Sale>(m => m.Requires("Type").HasValue(TradeType.Sale));
+        }
     }
 }

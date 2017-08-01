@@ -31,7 +31,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="DevelopmentHelperLib, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\DevelopmentHelperLib.1.17.20602.34\lib\net40\DevelopmentHelperLib.dll</HintPath>
+      <HintPath>..\packages\DevelopmentHelperLib.1.17.20607.37\lib\net40\DevelopmentHelperLib.dll</HintPath>
     </Reference>
     <Reference Include="Domain.Base, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\Domain.Base.1.17.20602.18\lib\net40\Domain.Base.dll</HintPath>
@@ -64,6 +64,7 @@
     <Compile Include="Configuration\MarketConfiguration.cs" />
     <Compile Include="Configuration\TradeConfiguration.cs" />
     <Compile Include="Configuration\TradeRangeInfoConfiguration.cs" />
+    <Compile Include="Entities\TradeType.cs" />
     <Compile Include="DataMinerContext.cs" />
     <Compile Include="Entities\Api.cs" />
     <Compile Include="Entities\ApiAsset.cs" />

@@ -44,7 +44,7 @@ namespace Domain.Dataminer
         }
 
         internal DataMinerContext()
-            : base("Name=IPP_CRM")
+            : base("Name=CryptoStore")
         {
         }
 
@@ -112,5 +112,14 @@ namespace Domain.Dataminer
 
     public interface IDataMinerContext : System.IDisposable, IRepositoryCreator
     {
+        DbSet<ApiAsset> ApiAssets { get; set; }
+        DbSet<Api> Api { get; set; }
+        DbSet<ApiExchange> ApiExchange { get; set; }
+        DbSet<ApiMarket> ApiMarkets { get; set; }
+        DbSet<Exchange> Exchanges { get; set; }
+        DbSet<Market> Markets { get; set; }
+        DbSet<Asset> Assets { get; set; }
+        DbSet<Trade> Trades { get; set; }
+        DbSet<TradeRangeInfo> TradeRangeInfos { get; set; }
     }
 }

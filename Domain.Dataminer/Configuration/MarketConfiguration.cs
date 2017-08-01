@@ -40,6 +40,18 @@ namespace Domain.Dataminer.Configuration
                 .HasColumnName(@"Name")
                 .IsRequired()
                 .HasColumnType("varchar");
+
+            HasRequired(asset => asset.Exchange)
+                .WithMany(i => i.Markets)
+                .HasForeignKey(asset => asset.ExchangeId);
+
+            HasRequired(asset => asset.PrimaryAsset)
+                .WithMany(i => i.PrimaryMarkets)
+                .HasForeignKey(asset => asset.PrimaryAssetId);
+
+            HasRequired(asset => asset.SecondaryAsset)
+                .WithMany(i => i.SecondaryMarkets)
+                .HasForeignKey(asset => asset.SecondaryAssetId);
         }
     }
 }

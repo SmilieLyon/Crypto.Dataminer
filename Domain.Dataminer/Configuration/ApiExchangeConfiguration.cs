@@ -45,8 +45,14 @@ namespace Domain.Dataminer.Configuration
             Property(x => x.TradeEnabled)
                 .HasColumnName(@"TradeEnabled")
                 .HasColumnType("Bit");
+
+            HasRequired(asset => asset.Api)
+                .WithMany(i => i.ApiExchanges)
+                .HasForeignKey(asset => asset.ApiId);
+
+            HasRequired(asset => asset.Exchange)
+                .WithMany(i => i.ApiExchanges)
+                .HasForeignKey(asset => asset.ExchangeId);
         }
-        public Api Api { get; set; }
-        public Exchange Exchange { get; set; }
     }
 }

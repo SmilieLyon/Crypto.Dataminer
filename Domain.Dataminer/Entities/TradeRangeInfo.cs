@@ -4,6 +4,7 @@ namespace Domain.Dataminer.Entities
 {
     public abstract class TradeRangeInfo
     {
+        public int TradeRangeInfoId { get; set; }
         public int MarketId { get; set; }
         public int ApiId { get; set; }
         public decimal High { get; set; }
@@ -13,6 +14,8 @@ namespace Domain.Dataminer.Entities
         public DateTime Time { get; set; }
         public decimal Last { get; set; }
         public decimal Volume { get; set; }
+        public Api Api { get; set; }
+        public Market Market { get; set; }
     }
 
 
@@ -20,7 +23,15 @@ namespace Domain.Dataminer.Entities
     {
     }
 
+    public class ThreeMinute : TradeRangeInfo
+    {
+    }
+
     public class FiveMinute : TradeRangeInfo
+    {
+    }
+
+    public class TenMinute : TradeRangeInfo
     {
     }
 
@@ -40,7 +51,15 @@ namespace Domain.Dataminer.Entities
     {
     }
 
+    public class ThreeHour : TradeRangeInfo
+    {
+    }
+
     public class FourHour : TradeRangeInfo
+    {
+    }
+
+    public class SixHour : TradeRangeInfo
     {
     }
 
@@ -52,7 +71,7 @@ namespace Domain.Dataminer.Entities
     {
     }
 
-    public class TwoDay : TradeRangeInfo
+    public class ThreeDay : TradeRangeInfo
     {
     }
 

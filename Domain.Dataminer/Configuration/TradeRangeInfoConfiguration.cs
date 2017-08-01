@@ -14,7 +14,13 @@ namespace Domain.Dataminer.Configuration
         public TradeRangeInfoConfiguration(string schema)
         {
             ToTable("TradeRangeInfo", schema);
-            HasKey(x => new { x.ApiId, x.MarketId });
+            HasKey(x => new { x.TradeRangeInfoId });
+
+            Property(x => x.TradeRangeInfoId)
+                .HasColumnName(@"TradeRangeInfoId")
+                .IsRequired()
+                .HasColumnType("int")
+                .HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.Identity);
 
             Property(x => x.MarketId)
                 .HasColumnName(@"MarketId")
@@ -55,16 +61,32 @@ namespace Domain.Dataminer.Configuration
                 .HasColumnName(@"Volume")
                 .IsRequired()
                 .HasColumnType("decimal(10,9)");
-        }
 
-        public int ExchangeMarketId { get; set; }
-        public int ApiId { get; set; }
-        public decimal High { get; set; }
-        public decimal Low { get; set; }
-        public decimal Open { get; set; }
-        public decimal Close { get; set; }
-        public DateTime Time { get; set; }
-        public decimal Last { get; set; }
-        public decimal Volume { get; set; }
+            HasRequired(asset => asset.Market)
+                .WithMany(i => i.TradeRangeInfos)
+                .HasForeignKey(asset => asset.MarketId);
+
+            HasRequired(asset => asset.Api)
+                .WithMany(i => i.TradeRangeInfos)
+                .HasForeignKey(asset => asset.ApiId);
+
+            Map<Minute>(m => m.Requires("Type").HasValue(TradeRangeInfoPeriod.Minute))
+                .Map<ThreeMinute>(m => m.Requires("Type").HasValue(TradeRangeInfoPeriod.ThreeMinute))
+                .Map<FiveMinute>(m => m.Requires("Type").HasValue(TradeRangeInfoPeriod.FiveMinute))
+                .Map<TenMinute>(m => m.Requires("Type").HasValue(TradeRangeInfoPeriod.TenMinute))
+                .Map<FifteenMinute>(m => m.Requires("Type").HasValue(TradeRangeInfoPeriod.FifteenMinute))
+                .Map<ThirtyMinute>(m => m.Requires("Type").HasValue(TradeRangeInfoPeriod.ThirtyMinute))
+                .Map<Hour>(m => m.Requires("Type").HasValue(TradeRangeInfoPeriod.Hour))
+                .Map<TwoHour>(m => m.Requires("Type").HasValue(TradeRangeInfoPeriod.TwoHour))
+                .Map<ThreeHour>(m => m.Requires("Type").HasValue(TradeRangeInfoPeriod.ThreeHour))
+                .Map<FourHour>(m => m.Requires("Type").HasValue(TradeRangeInfoPeriod.FourHour))
+                .Map<SixHour>(m => m.Requires("Type").HasValue(TradeRangeInfoPeriod.SixHour))
+                .Map<TwelveHour>(m => m.Requires("Type").HasValue(TradeRangeInfoPeriod.TwelveHour))
+                .Map<Day>(m => m.Requires("Type").HasValue(TradeRangeInfoPeriod.Day))
+                .Map<ThreeDay>(m => m.Requires("Type").HasValue(TradeRangeInfoPeriod.ThreeDay))
+                .Map<Week>(m => m.Requires("Type").HasValue(TradeRangeInfoPeriod.Week))
+                .Map<TwoWeek>(m => m.Requires("Type").HasValue(TradeRangeInfoPeriod.TwoWeek))
+                .Map<Month>(m => m.Requires("Type").HasValue(TradeRangeInfoPeriod.Month));
+        }
     }
 }
