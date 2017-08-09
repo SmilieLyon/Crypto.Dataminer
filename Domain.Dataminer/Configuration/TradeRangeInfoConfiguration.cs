@@ -32,6 +32,10 @@ namespace Domain.Dataminer.Configuration
                 .IsRequired()
                 .HasColumnType("int");
 
+            Property(x => x.Time)
+                .HasColumnName(@"Time")
+                .HasColumnType("datetime");
+
             Property(x => x.High)
                 .HasColumnName(@"High")
                 .HasColumnType("decimal")

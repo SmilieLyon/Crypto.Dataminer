@@ -38,9 +38,6 @@
     <Reference Include="AutoMapper, Version=6.1.1.0, Culture=neutral, PublicKeyToken=be96cd2c38ef1005, processorArchitecture=MSIL">
       <HintPath>..\packages\AutoMapper.6.1.1\lib\net45\AutoMapper.dll</HintPath>
     </Reference>
-    <Reference Include="Coinigy.API, Version=0.1.0.22263, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Coinigy.API.0.1.0.22263\lib\portable45-net45+win8+wpa81\Coinigy.API.dll</HintPath>
-    </Reference>
     <Reference Include="DevelopmentHelperLib, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\DevelopmentHelperLib.1.17.20607.37\lib\net40\DevelopmentHelperLib.dll</HintPath>
     </Reference>
@@ -100,6 +97,10 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\Coinigy_.NET_PCL_API\Coinigy.API\Coinigy.API\Coinigy.API.csproj">
+      <Project>{3360e850-78d9-4b1a-83cb-b1f39acaf77a}</Project>
+      <Name>Coinigy.API</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Domain.Dataminer\Domain.Dataminer.csproj">
       <Project>{f3afb149-38d4-4496-9a9b-f875b72fb73b}</Project>
       <Name>Domain.Dataminer</Name>

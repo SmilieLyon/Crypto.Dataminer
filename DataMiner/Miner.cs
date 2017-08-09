@@ -3,7 +3,6 @@ using System.IO;
 using AutoMapper;
 using Domain.Dataminer;
 using Domain.Dataminer.Entities;
-using Domain.Dataminer.FromDb;
 using Newtonsoft.Json;
 using Serilog;
 using Api = Domain.Dataminer.Entities.Api;
@@ -91,27 +90,11 @@ namespace DataMiner
 
         private static void Main(string[] args)
         {
-            CheckDbAccess();
             Setup();
             var retriever = new ExchangeMarketDataRetriever("37ceafda7db504c74bdf6d1bd9a82036",
                 "2e695bf3249a7380486e6ab1d4003d0c",
                 new JsonFileAppender("ExchangeList", TradeRangeInfoPeriod.Week));
             var response = retriever.GetTick("PLNX", "BTC/USDT");
-        }
-
-        private static void CheckDbAccess()
-        {
-            using (var dbContext = DataMinerContext.Create())
-            //using (var dbContext = new Model1("name=CryptoStore"))
-            {
-                //var api = new Domain.Dataminer.FromDb.Api()
-                var api = new Api()
-                {
-                    Name = "Coinigy"
-                };
-                dbContext.Api.Add(api);
-                dbContext.SaveChanges();
-            }
         }
     }
 }

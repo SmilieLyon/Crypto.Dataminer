@@ -11,7 +11,7 @@ namespace Domain.Dataminer.Entities
         public decimal? Low { get; set; }
         public decimal? Open { get; set; }
         public decimal? Close { get; set; }
-        //public DateTime Time { get; set; }
+        public DateTime Time { get; set; }
         public decimal? Last { get; set; }
         public decimal? Volume { get; set; }
         public Api Api { get; set; }
