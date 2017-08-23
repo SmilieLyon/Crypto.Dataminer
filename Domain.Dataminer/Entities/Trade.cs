@@ -1,4 +1,6 @@
-﻿namespace Domain.Dataminer.Entities
+﻿using System;
+
+namespace Domain.Dataminer.Entities
 {
     public abstract class Trade
     {
@@ -8,6 +10,7 @@
         public decimal? Amount { get; set; }
         public decimal? Rate { get; set; }
         public decimal? Cost { get; set; }
+        public DateTime Time { get; set; }
         public Api Api { get; set; }
         public Market Market { get; set; }
     }

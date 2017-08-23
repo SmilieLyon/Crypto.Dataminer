@@ -82,6 +82,17 @@
     <None Include="App.config" />
     <None Include="packages.config" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Content Include="Scripts\CryptoStore.Database.sql" />
+    <Content Include="Scripts\dbo.Api.Table.sql" />
+    <Content Include="Scripts\dbo.ApiAsset.Table.sql" />
+    <Content Include="Scripts\dbo.ApiExchange.Table.sql" />
+    <Content Include="Scripts\dbo.ApiMarket.Table.sql" />
+    <Content Include="Scripts\dbo.Asset.Table.sql" />
+    <Content Include="Scripts\dbo.Exchange.Table.sql" />
+    <Content Include="Scripts\dbo.Market.Table.sql" />
+    <Content Include="Scripts\dbo.Trade.Table.sql" />
+    <Content Include="Scripts\dbo.TradeRangeInfo.Table.sql" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

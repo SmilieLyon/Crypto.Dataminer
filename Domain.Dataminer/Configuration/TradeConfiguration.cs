@@ -50,6 +50,11 @@ namespace Domain.Dataminer.Configuration
                 .HasColumnType("decimal")
                 .HasPrecision(10, 9);
 
+            Property(x => x.Time)
+                .HasColumnName(@"Time")
+                .IsRequired()
+                .HasColumnType("datetime");
+
             HasRequired(asset => asset.Market)
                 .WithMany(i => i.Trades)
                 .HasForeignKey(asset => asset.MarketId);

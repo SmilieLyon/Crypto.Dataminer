@@ -27,6 +27,7 @@ namespace Domain.Dataminer.Configuration
 
             Property(x => x.Code)
                 .HasColumnName(@"Code")
+                .IsRequired()
                 .HasColumnType("varchar")
                 .HasMaxLength(50);
 

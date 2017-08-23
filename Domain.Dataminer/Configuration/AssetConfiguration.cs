@@ -31,7 +31,7 @@ namespace Domain.Dataminer.Configuration
             Property(x => x.Url)
                 .HasColumnName(@"Url")
                 .HasColumnType("varchar")
-                .HasMaxLength(50);
+                .HasMaxLength(200);
 
             Property(x => x.Description)
                 .HasColumnName(@"Description")

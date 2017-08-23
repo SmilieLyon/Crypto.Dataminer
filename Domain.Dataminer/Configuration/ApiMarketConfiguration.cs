@@ -27,11 +27,13 @@ namespace Domain.Dataminer.Configuration
 
             Property(x => x.ExternalName)
                 .HasColumnName(@"ExternalName")
+                .IsRequired()
                 .HasColumnType("varchar")
                 .HasMaxLength(50);
 
             Property(x => x.Code)
                 .HasColumnName(@"Code")
+                .IsRequired()
                 .HasColumnType("varchar")
                 .HasMaxLength(50);
 
