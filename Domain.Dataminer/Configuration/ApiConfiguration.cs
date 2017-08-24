@@ -27,6 +27,10 @@ namespace Domain.Dataminer.Configuration
                 .IsRequired()
                 .HasColumnType("varchar")
                 .HasMaxLength(50);
+
+            Property(x => x.LastUpdated)
+                .HasColumnName(@"LastUpdated")
+                .HasColumnType("date");
         }
     }
 }

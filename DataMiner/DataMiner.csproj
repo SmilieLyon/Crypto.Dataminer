@@ -87,7 +87,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="DataRetriever.cs" />
+    <Compile Include="CoinigyDataAdapter\CoinigyMaps.cs" />
+    <Compile Include="CoinigyDataAdapter\DataRetriever.cs" />
     <Compile Include="FileStore.cs" />
     <Compile Include="Miner.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

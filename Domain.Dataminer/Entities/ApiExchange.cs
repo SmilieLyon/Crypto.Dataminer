@@ -1,4 +1,6 @@
-﻿namespace Domain.Dataminer.Entities
+﻿using System;
+
+namespace Domain.Dataminer.Entities
 {
     public class ApiExchange
     {
@@ -11,5 +13,6 @@
         public bool? TradeEnabled { get; set; }
         public Api Api { get; set; }
         public Exchange Exchange { get; set; }
+        public DateTime PairsLastUpdated { get; set; }
     }
 }

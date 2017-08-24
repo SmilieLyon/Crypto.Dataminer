@@ -49,6 +49,10 @@ namespace Domain.Dataminer.Configuration
                 .HasColumnName(@"TradeEnabled")
                 .HasColumnType("Bit");
 
+            Property(x => x.PairsLastUpdated)
+                .HasColumnName(@"PairsLastUpdated")
+                .HasColumnType("date");
+
             HasRequired(asset => asset.Api)
                 .WithMany(i => i.ApiExchanges)
                 .HasForeignKey(asset => asset.ApiId);

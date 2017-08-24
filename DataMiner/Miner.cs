@@ -5,9 +5,7 @@ using Domain.Dataminer;
 using Domain.Dataminer.Entities;
 using Newtonsoft.Json;
 using Serilog;
-using Api = Domain.Dataminer.Entities.Api;
-using Exchange = Coinigy.API.Responses.Exchange;
-using Market = Coinigy.API.Responses.Market;
+using DataMiner.CoinigyDataAdapter;
 
 namespace DataMiner
 {
@@ -79,15 +77,9 @@ namespace DataMiner
                 .WriteTo.RollingFile("log-{Date}.log")
                 .CreateLogger();
 
-            Mapper.Initialize(cfg => { ConfigureMaps(cfg); });
+            Mapper.Initialize(cfg => { CoinigyMaps.ConfigureMaps(cfg); });
         }
-
-        public static void ConfigureMaps(IMapperConfigurationExpression cfg)
-        {
-            cfg.CreateMap<Exchange, ExchangeMarketDataRetriever.ExchangeMarkets>();
-            cfg.CreateMap<Market, ExchangeMarketDataRetriever.MarketValue>();
-        }
-
+        
         private static void Main(string[] args)
         {
             Setup();
@@ -95,6 +87,7 @@ namespace DataMiner
                 "2e695bf3249a7380486e6ab1d4003d0c",
                 new JsonFileAppender("ExchangeList", TradeRangeInfoPeriod.Week));
             var response = retriever.GetTick("PLNX", "BTC/USDT");
+            Console.WriteLine(JsonConvert.SerializeObject(response));
         }
     }
 }

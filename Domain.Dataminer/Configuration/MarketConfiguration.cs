@@ -43,6 +43,10 @@ namespace Domain.Dataminer.Configuration
                 .HasColumnType("varchar")
                 .HasMaxLength(50);
 
+            Property(x => x.Enabled)
+                .HasColumnName("Enabled")
+                .HasColumnType("bit");
+
             HasRequired(asset => asset.Exchange)
                 .WithMany(i => i.Markets)
                 .HasForeignKey(asset => asset.ExchangeId);
