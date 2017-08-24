@@ -25,7 +25,7 @@ namespace Domain.Dataminer.Configuration
                 .IsRequired()
                 .HasColumnType("int");
 
-            Property(x => x.ExternalName)
+            Property(x => x.ExternalId)
                 .HasColumnName(@"ExternalName")
                 .IsRequired()
                 .HasColumnType("varchar")

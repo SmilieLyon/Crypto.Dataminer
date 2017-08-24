@@ -109,7 +109,7 @@ namespace DataMiner
         {
             var marketNames = marketValue.mkt_name.Split('/');
             var marketTo = CheckAssetApiExistsInDb(apiAssetRepo, assetRepo, apiExchange, marketNames[0]);
-            var marketFrom = CheckAssetApiExistsInDb(apiAssetRepo, assetRepo, apiExchange, marketNames[0]);
+            var marketFrom = CheckAssetApiExistsInDb(apiAssetRepo, assetRepo, apiExchange, marketNames[1]);
             var market = marketRepo.Query().FirstOrDefault(x => x.PrimaryAssetId == marketTo.AssetId && x.SecondaryAssetId == marketFrom.AssetId);
             if (market == null)
             {
