@@ -84,9 +84,10 @@ namespace DataMiner
         {
             Setup();
             var retriever = new ExchangeMarketDataRetriever("37ceafda7db504c74bdf6d1bd9a82036",
-                "2e695bf3249a7380486e6ab1d4003d0c",
-                new JsonFileAppender("ExchangeList", TradeRangeInfoPeriod.Week));
-            var response = retriever.GetTick("PLNX", "BTC/USDT");
+                "2e695bf3249a7380486e6ab1d4003d0c");
+            //retriever.StartMiner("PLNX", "BTC/USDT", TradeRangeInfoPeriod.Hour);
+            //retriever.StartMiner("PLNX", "BTC/USDT", TradeRangeInfoPeriod.TenMinute);
+            //retriever.StartMiner("PLNX", "BTC/USDT", TradeRangeInfoPeriod.FourHour);
             Console.WriteLine(JsonConvert.SerializeObject(response));
         }
     }

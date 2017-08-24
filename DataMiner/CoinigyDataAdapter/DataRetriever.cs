@@ -96,6 +96,24 @@ namespace DataMiner.CoinigyDataAdapter
             }
         }
 
+        // Insufficient options on api. Potentially wss might give it but as it stands doesnt look like it.
+        //internal void StartMiner(string exchange, string market, TradeRangeInfoPeriod period)
+        //{
+        //    while (true)
+        //    {
+        //        using (var dbContext = DataMinerContext.Create())
+        //        {
+        //            var apiRepo = dbContext.CreateRepository<Api>();
+        //            var apiMarketRepo = dbContext.CreateRepository<ApiMarket>();
+        //            var tradeRangeInfoRepo = dbContext.CreateRepository<TradeRangeInfo>();
+
+        //            var coinigyApi = GetCreateCoinigyApi(apiRepo);
+
+        //            var tradeRange = Api.Data(exchange, market, MarketDataType.)
+        //        }
+        //    }
+        //}
+
         private void UpdateMarketName(ExchangeMarkets bitMex, string v1, string v2)
         {
             var obj = bitMex.Markets.FirstOrDefault(mkt => mkt.mkt_name == v1);
