@@ -50,7 +50,7 @@ namespace DataMiner.CoinigyDataAdapter
             }
         }
 
-        private void ListMarkets()
+        public void UpdateMarketList()
         {
             using (var dbContext = DataMinerContext.Create())
             {
@@ -95,25 +95,7 @@ namespace DataMiner.CoinigyDataAdapter
                 SaveExchangeMarketList(exchangeMarkets, dbContext, coinigyApi);
             }
         }
-
-        // Insufficient options on api. Potentially wss might give it but as it stands doesnt look like it.
-        //internal void StartMiner(string exchange, string market, TradeRangeInfoPeriod period)
-        //{
-        //    while (true)
-        //    {
-        //        using (var dbContext = DataMinerContext.Create())
-        //        {
-        //            var apiRepo = dbContext.CreateRepository<Api>();
-        //            var apiMarketRepo = dbContext.CreateRepository<ApiMarket>();
-        //            var tradeRangeInfoRepo = dbContext.CreateRepository<TradeRangeInfo>();
-
-        //            var coinigyApi = GetCreateCoinigyApi(apiRepo);
-
-        //            var tradeRange = Api.Data(exchange, market, MarketDataType.)
-        //        }
-        //    }
-        //}
-
+        
         private void UpdateMarketName(ExchangeMarkets bitMex, string v1, string v2)
         {
             var obj = bitMex.Markets.FirstOrDefault(mkt => mkt.mkt_name == v1);
@@ -134,6 +116,12 @@ namespace DataMiner.CoinigyDataAdapter
             var assetRepo = dbContext.CreateRepository<Asset>();
             var apiAssetRepo = dbContext.CreateRepository<ApiAsset>();
 
+            var apiExchanges = apiExchangeRepo.Query().Where(x=> x.ApiId == coinigyApi.ApiId);
+            foreach(var exchange in apiExchanges)
+            {
+                exchange.Enabled = (exchangeMarkets.Any(x => x.exch_code == exchange.Code));
+            }
+
             foreach (var exchangeMarket in exchangeMarkets)
             {
                 var exchangeApi = CheckExchangeApiExistsInDb(exchangeRepo, apiExchangeRepo, coinigyApi, exchangeMarket);
@@ -141,20 +129,17 @@ namespace DataMiner.CoinigyDataAdapter
                 {
                     var marketApi = CheckMarketApiExistsInDb(apiMarketRepo, marketRepo, apiAssetRepo, assetRepo, exchangeApi, market);
                 }
-                var dbExchangeMarkets = marketRepo.Query()
-                                .Include(market => market.PrimaryAsset)
-                                .Include(market => market.SecondaryAsset)
-                                .Where(market => market.ExchangeId == exchangeApi.ExchangeId);
+                var dbExchangeMarkets = apiMarketRepo.Query()
+                                .Include(x => x.Market)
+                                .Where(market => market.ApiId == coinigyApi.ApiId && market.Market.ExchangeId == exchangeApi.ExchangeId);
 
                 foreach (var mkt in dbExchangeMarkets)
                 {
-                    if (!exchangeMarket.Markets.Any(market1 => market1.mkt_name == mkt.PrimaryAsset.Name + "/" + mkt.SecondaryAsset.Name))
-                    {
-                        mkt.Enabled = false;
-                    }
+                    mkt.Enabled = exchangeMarket.Markets.Any(market1 => market1.mkt_name == mkt.Code);
                 }
                 exchangeApi.PairsLastUpdated = DateTime.Now;
             }
+            coinigyApi.LastUpdated = DateTime.Now;
             dbContext.SaveChanges();
         }
 
@@ -287,7 +272,6 @@ namespace DataMiner.CoinigyDataAdapter
         public ticker_response GetTick(string exchange, string code)
         {
             //var data = Api.Data("PLNX", "BTC/USDT", MarketDataType.history);
-            //ListMarkets();
             return Api.Ticker(exchange, code);
         }
 

@@ -14,5 +14,6 @@ namespace Domain.Dataminer.Entities
         public Api Api { get; set; }
         public Exchange Exchange { get; set; }
         public DateTime PairsLastUpdated { get; set; }
+        public bool Enabled { get; set; }
     }
 }

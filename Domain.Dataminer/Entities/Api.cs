@@ -22,6 +22,6 @@ namespace Domain.Dataminer.Entities
         public ICollection<ApiMarket> ApiMarkets { get; set; }
         public ICollection<Trade> Trades { get; set; }
         public ICollection<TradeRangeInfo> TradeRangeInfos { get; set; }
-        public DateTime LastUpdated { get; internal set; }
+        public DateTime LastUpdated { get; set; }
     }
 }

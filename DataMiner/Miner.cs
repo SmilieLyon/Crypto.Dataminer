@@ -4,7 +4,6 @@ using AutoMapper;
 using DataMiner.Properties;
 using Domain.Dataminer.Entities;
 using Newtonsoft.Json;
-using DataMiner.CoinigyDataAdapter;
 using Serilog;
 using Serilog.Formatting.Json;
 
@@ -79,18 +78,37 @@ namespace DataMiner
                 .WriteTo.Console()
                 .CreateLogger();
 
-            Mapper.Initialize(cfg => { CoinigyMaps.ConfigureMaps(cfg); });
+            Mapper.Initialize(cfg => { CoinigyDataAdapter.CoinigyMaps.ConfigureMaps(cfg); });
         }
         
         private static void Main(string[] args)
         {
             Setup();
             Log.Information("Starting");
-            var retriever = new ExchangeMarketDataRetriever(Settings.Default.CoinigyApiKey, Settings.Default.CoinigyApiSecret);
-            //retriever.StartMiner("PLNX", "BTC/USDT", TradeRangeInfoPeriod.Hour);
-            //retriever.StartMiner("PLNX", "BTC/USDT", TradeRangeInfoPeriod.TenMinute);
-            //retriever.StartMiner("PLNX", "BTC/USDT", TradeRangeInfoPeriod.FourHour);
+            StartCoinigy();
+            StartKraken();
+            StartPoloniex();
+            StartBittrex();
+
             Log.Information("Ended");
+        }
+
+        private static void StartBittrex()
+        {
+        }
+
+        private static void StartPoloniex()
+        {
+        }
+
+        private static void StartKraken()
+        {
+        }
+
+        private static void StartCoinigy()
+        {
+            var retriever = new CoinigyDataAdapter.ExchangeMarketDataRetriever(Settings.Default.CoinigyApiKey, Settings.Default.CoinigyApiSecret);
+            retriever.UpdateMarketList();
         }
     }
 }

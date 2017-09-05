@@ -16,7 +16,6 @@ namespace Domain.Dataminer.Entities
         public int PrimaryAssetId { get; set; }
         public int SecondaryAssetId { get; set; }
         public string Name { get; set; }
-        public bool Enabled { get; set; }
 
         public Asset PrimaryAsset { get; set; }
         public Asset SecondaryAsset { get; set; }

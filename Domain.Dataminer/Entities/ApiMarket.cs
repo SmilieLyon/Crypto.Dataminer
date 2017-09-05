@@ -8,5 +8,6 @@
         public string Code { get; set; }
         public Api Api { get; set; }
         public Market Market { get; set; }
+        public bool Enabled { get; set; }
     }
 }

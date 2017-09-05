@@ -37,6 +37,10 @@ namespace Domain.Dataminer.Configuration
                 .HasColumnType("varchar")
                 .HasMaxLength(50);
 
+            Property(x => x.Enabled)
+                .HasColumnName(@"Enabled")
+                .HasColumnType("bit");
+
             HasRequired(asset => asset.Api)
                 .WithMany(i => i.ApiMarkets)
                 .HasForeignKey(asset => asset.ApiId);
