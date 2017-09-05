@@ -1,0 +1,12 @@
+﻿<?xml version='1.0' encoding='utf-8'?>
+<SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="DataMiner.Properties" GeneratedClassName="Settings">
+  <Profiles />
+  <Settings>
+    <Setting Name="CoinigyApiKey" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">37ceafda7db504c74bdf6d1bd9a82036</Value>
+    </Setting>
+    <Setting Name="CoinigyApiSecret" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">2e695bf3249a7380486e6ab1d4003d0c</Value>
+    </Setting>
+  </Settings>
+</SettingsFile>

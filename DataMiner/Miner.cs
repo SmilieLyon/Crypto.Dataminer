@@ -1,11 +1,12 @@
 ﻿using System;
 using System.IO;
 using AutoMapper;
-using Domain.Dataminer;
+using DataMiner.Properties;
 using Domain.Dataminer.Entities;
 using Newtonsoft.Json;
-using Serilog;
 using DataMiner.CoinigyDataAdapter;
+using Serilog;
+using Serilog.Formatting.Json;
 
 namespace DataMiner
 {
@@ -74,7 +75,8 @@ namespace DataMiner
         public static void Setup()
         {
             Log.Logger = new LoggerConfiguration()
-                .WriteTo.RollingFile("log-{Date}.log")
+                .WriteTo.RollingFile(new JsonFormatter(),"log-{Date}.log")
+                .WriteTo.Console()
                 .CreateLogger();
 
             Mapper.Initialize(cfg => { CoinigyMaps.ConfigureMaps(cfg); });
@@ -83,12 +85,12 @@ namespace DataMiner
         private static void Main(string[] args)
         {
             Setup();
-            var retriever = new ExchangeMarketDataRetriever("37ceafda7db504c74bdf6d1bd9a82036",
-                "2e695bf3249a7380486e6ab1d4003d0c");
+            Log.Information("Starting");
+            var retriever = new ExchangeMarketDataRetriever(Settings.Default.CoinigyApiKey, Settings.Default.CoinigyApiSecret);
             //retriever.StartMiner("PLNX", "BTC/USDT", TradeRangeInfoPeriod.Hour);
             //retriever.StartMiner("PLNX", "BTC/USDT", TradeRangeInfoPeriod.TenMinute);
             //retriever.StartMiner("PLNX", "BTC/USDT", TradeRangeInfoPeriod.FourHour);
-            Console.WriteLine(JsonConvert.SerializeObject(response));
+            Log.Information("Ended");
         }
     }
 }
