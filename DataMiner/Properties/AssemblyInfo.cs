@@ -7,9 +7,9 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyTitle("DataMiner")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("Bambora")]
+[assembly: AssemblyCompany("Matt")]
 [assembly: AssemblyProduct("DataMiner")]
-[assembly: AssemblyCopyright("Copyright © Bambora 2017")]
+[assembly: AssemblyCopyright("Copyright © Matt 2017")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 

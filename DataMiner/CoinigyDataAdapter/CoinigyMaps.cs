@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Coinigy.API.Responses;
 
 namespace DataMiner.CoinigyDataAdapter
 {
@@ -6,8 +7,8 @@ namespace DataMiner.CoinigyDataAdapter
     {
         public static void ConfigureMaps(IMapperConfigurationExpression cfg)
         {
-            cfg.CreateMap<Coinigy.API.Responses.Exchange, ExchangeMarketDataRetriever.ExchangeMarkets>();
-            cfg.CreateMap<Coinigy.API.Responses.Market, ExchangeMarketDataRetriever.MarketValue>();
+            cfg.CreateMap<Exchange, ExchangeMarketDataRetriever.ExchangeMarkets>();
+            cfg.CreateMap<Market, ExchangeMarketDataRetriever.MarketValue>();
         }
     }
 }

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.IO;
 using AutoMapper;
+using DataMiner.CoinigyDataAdapter;
 using DataMiner.Properties;
 using Domain.Dataminer.Entities;
 using Newtonsoft.Json;
@@ -74,13 +75,13 @@ namespace DataMiner
         public static void Setup()
         {
             Log.Logger = new LoggerConfiguration()
-                .WriteTo.RollingFile(new JsonFormatter(),"log-{Date}.log")
+                .WriteTo.RollingFile(new JsonFormatter(), "log-{Date}.log")
                 .WriteTo.Console()
                 .CreateLogger();
 
-            Mapper.Initialize(cfg => { CoinigyDataAdapter.CoinigyMaps.ConfigureMaps(cfg); });
+            Mapper.Initialize(cfg => { CoinigyMaps.ConfigureMaps(cfg); });
         }
-        
+
         private static void Main(string[] args)
         {
             Setup();
@@ -107,7 +108,8 @@ namespace DataMiner
 
         private static void StartCoinigy()
         {
-            var retriever = new CoinigyDataAdapter.ExchangeMarketDataRetriever(Settings.Default.CoinigyApiKey, Settings.Default.CoinigyApiSecret);
+            var retriever = new ExchangeMarketDataRetriever(Settings.Default.CoinigyApiKey,
+                Settings.Default.CoinigyApiSecret);
             retriever.UpdateMarketList();
         }
     }

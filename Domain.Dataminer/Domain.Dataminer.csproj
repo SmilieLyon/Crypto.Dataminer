@@ -76,6 +76,7 @@
     <Compile Include="Entities\Exchange.cs" />
     <Compile Include="Entities\Asset.cs" />
     <Compile Include="Entities\TradeRangeInfoPeriod.cs" />
+    <Compile Include="Extensions\RepoExtensions.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
